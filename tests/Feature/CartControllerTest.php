@@ -20,7 +20,7 @@ class CartControllerTest extends TestCase
         ];
 
         $response = $this->post('/cart/add', $data);
-        $response->assertStatus(200);
+        $response->assertRedirect('/cart');
 
         $this->assertTrue(Session::has('cart'));
 
@@ -28,5 +28,18 @@ class CartControllerTest extends TestCase
         $cart = Session::get('cart');
 
         $this->assertEquals([$data], $cart->getItems());
+    }
+
+    public function testCartContent()
+    {
+        /** @var Cart $cart */
+        $cart = app(Cart::class);
+        Session::put('cart', $cart);
+
+        $cart->addItem('P111', 'Pizza', 1, 110000);
+
+        $response = $this->get('/cart');
+        $response->assertOk()
+                 ->assertSee('P111');
     }
 }

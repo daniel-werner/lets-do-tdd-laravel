@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -17,7 +18,7 @@ class CartController extends Controller
         }
     }
 
-    public function add(Request $request): Response
+    public function add(Request $request)
     {
         /** @var Cart $cart */
         $cart = session()->get('cart');
@@ -28,6 +29,16 @@ class CartController extends Controller
             $request->get('price')
         );
 
-        return \response('');
+        return redirect('/cart');
+    }
+
+    public function index(Request $request)
+    {
+        /** @var Cart $cart */
+        $cart = session()->get('cart');
+
+        return view('cart.index',[
+            'cartItems' => $cart->getItems()
+        ]);
     }
 }

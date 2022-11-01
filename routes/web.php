@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::post('/cart/add', [CartController::class, 'add']);
+Route::get('/cart', [CartController::class, 'index']);
