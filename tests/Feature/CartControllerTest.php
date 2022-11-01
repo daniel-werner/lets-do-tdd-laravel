@@ -34,11 +34,14 @@ class CartControllerTest extends TestCase
         $cart = app(Cart::class);
         Session::put('cart', $cart);
 
-        $cart->addItem('P111', 'Pizza', 1, 110000);
+        $cart->addItem('P111', 'Pizza 1', 1, 110000);
+        $cart->addItem('P112', 'Pizza 2', 1, 120000);
 
         $response = $this->get('/cart');
         $response->assertOk()
-                 ->assertSee('P111');
+                 ->assertSee('P111')
+                 ->assertSee('Total')
+                 ->assertSee('230000');
     }
 
     public function testAddToCartForm()

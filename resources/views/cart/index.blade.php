@@ -5,7 +5,7 @@
         <td>Quantity</td>
         <td>Price</td>
     </tr>
-    @foreach($cartItems as $cartItem)
+    @foreach($cart->getItems() as $cartItem)
         <tr>
             <td>{{$cartItem['code']}}</td>
             <td>{{$cartItem['name']}}</td>
@@ -13,4 +13,10 @@
             <td>{{$cartItem['price']}}</td>
         </tr>
     @endforeach
+    <tr>
+        <td></td>
+        <td></td>
+        <td>Total:</td>
+        <td>{{$cart->getTotal()}}</td>
+    </tr>
 </table>

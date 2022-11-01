@@ -36,7 +36,7 @@ class CartController extends Controller
         $cart = session()->get('cart');
 
         return view('cart.index',[
-            'cartItems' => $cart->getItems()
+            'cart' => $cart
         ]);
     }
 
