@@ -18,5 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/cart/add', [CartController::class, 'add']);
+Route::post('/cart/add', [CartController::class, 'store']);
+Route::get('/cart/add', [CartController::class, 'add']);
 Route::get('/cart', [CartController::class, 'index']);

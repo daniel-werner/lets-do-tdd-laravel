@@ -2,14 +2,12 @@
 
 namespace Tests\Feature;
 
-// use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Cart;
 use Illuminate\Support\Facades\Session;
 use Tests\TestCase;
 
 class CartControllerTest extends TestCase
 {
-
     public function testAddItemToCart()
     {
         $data = [
@@ -41,5 +39,10 @@ class CartControllerTest extends TestCase
         $response = $this->get('/cart');
         $response->assertOk()
                  ->assertSee('P111');
+    }
+
+    public function testAddToCartForm()
+    {
+        $this->get('/cart/add')->assertOk();
     }
 }

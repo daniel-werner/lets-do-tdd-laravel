@@ -9,8 +9,6 @@ use Illuminate\Http\Response;
 
 class CartController extends Controller
 {
-
-
     public function __construct()
     {
         if(!session()->has('cart')) {
@@ -18,7 +16,7 @@ class CartController extends Controller
         }
     }
 
-    public function add(Request $request)
+    public function store(Request $request)
     {
         /** @var Cart $cart */
         $cart = session()->get('cart');
@@ -40,5 +38,10 @@ class CartController extends Controller
         return view('cart.index',[
             'cartItems' => $cart->getItems()
         ]);
+    }
+
+    public function add()
+    {
+        return view('cart.add');
     }
 }
