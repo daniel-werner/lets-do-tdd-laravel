@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 use App\Cart;
+use App\Events\ItemAddedToCartEvent;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Session;
 use Tests\TestCase;
 
@@ -10,6 +12,8 @@ class CartControllerTest extends TestCase
 {
     public function testAddItemToCart()
     {
+        Event::fake();
+
         $data = [
             'code' => 'P111',
             'name' => 'Pizza',
@@ -26,6 +30,8 @@ class CartControllerTest extends TestCase
         $cart = Session::get('cart');
 
         $this->assertEquals([$data], $cart->getItems());
+
+        Event::assertDispatched(ItemAddedToCartEvent::class);
     }
 
     public function testCartContent()

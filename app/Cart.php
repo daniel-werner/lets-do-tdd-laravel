@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Events\ItemAddedToCartEvent;
+
 class Cart
 {
     protected array $items = [];
@@ -21,6 +23,8 @@ class Cart
             'quantity' => $quantity,
             'price' => $price
         ];
+
+        ItemAddedToCartEvent::dispatch();
     }
 
     public function removeItem(string $code)
